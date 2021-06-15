@@ -23,7 +23,7 @@ namespace PopUpModalWindow.Controllers
         [HttpPost]
         public IActionResult Create(Student model)
         {
-            return View();
+            return Json(model);
         }
     }
 }
