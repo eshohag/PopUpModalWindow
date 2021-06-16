@@ -20,8 +20,9 @@ function submitForm(fromInformation) {
             },
             success: function (result) {
                 debugger;
-                bootbox.alert(result.FullName+" & "+result.Email);
+                bootbox.alert(result.message);
                 Spiner.hide();
+                loadLink(result.redirectTo, result.position);
             },
             error: function (status) {
                 bootbox.alert(status);
@@ -108,20 +109,21 @@ var Spiner = (function () {
     return result;
 }());
 
-function loadLink(url, id) {
-    if (typeof (id) === 'undefined') {
+function loadLink(url, positionId) {
+    if (typeof (positionId) === 'undefined') {
         loadPartialView(url, 'mainContent');
     } else {
-        loadPartialView(url, id);
+        loadPartialView(url, positionId);
     }
 }
 
-function loadPartialView(link, position) {
-    $('#' + position).html('');
+function loadPartialView(urlLink, positionId) {
+    debugger;
+    $('#' + positionId).html('');
     Spiner.show();
     setTimeout(function () {
         var resp = $.ajax({
-            url: link,
+            url: urlLink,
             contentType: 'application/html; charset=utf-8',
             type: 'GET',
             async: false,
@@ -130,8 +132,8 @@ function loadPartialView(link, position) {
                 Spiner.show();
             },
             success: function (result) {
-                $('#' + position).show();
-                $('#' + position).html(result);
+                $('#' + positionId).show();
+                $('#' + positionId).html(result);
                 Spiner.hide();
             },
             error: function (status) {
