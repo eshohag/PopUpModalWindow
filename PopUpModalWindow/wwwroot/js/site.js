@@ -3,6 +3,8 @@
 function submitPostForm(fromInformation) {
     var formId = "#" + fromInformation[0].getAttribute('id');
     var formActionUrl = fromInformation[0].getAttribute('action');
+    var method = fromInformation[0].setAttribute("method");
+
     debugger;
 
     var isValid = $(formId).valid()
