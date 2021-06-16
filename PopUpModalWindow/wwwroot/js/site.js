@@ -1,20 +1,19 @@
 ﻿// Write your JavaScript code.
 
-function submitPostForm(fromId, url) {
-    $(fromId).on('submit', function (e) {
-        var eee = e;
-        e.preventDefault();
-        debugger;
-        var isValid = $(fromId).valid()
-        if (isValid) {
-            var formData = $(this).serialize();
-            $.post(url, formData, function (response) {
-                //Do something with response
-                debugger;
-                alert(response.FullName);
-            });
-        }
-    });
+function submitPostForm(fromInformation) {
+    var formId = "#" + fromInformation[0].getAttribute('id');
+    var formActionUrl = fromInformation[0].getAttribute('action');
+    debugger;
+
+    var isValid = $(formId).valid()
+    if (isValid) {
+        var formData = $(formId).serialize();
+        $.post(formActionUrl, formData, function (response) {
+            //Do something with response
+            debugger;
+            alert(response.FullName);
+        });
+    }
 }
 function closeModal() {
     $('#myModal').modal('hide');

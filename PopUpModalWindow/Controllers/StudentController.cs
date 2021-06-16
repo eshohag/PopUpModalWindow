@@ -26,7 +26,7 @@ namespace PopUpModalWindow.Controllers
             //        position = "subContainer"
             //    }
             //);
-            return PartialView();
+            return View();
         }
         [HttpPost]
         public IActionResult Create(Student model)

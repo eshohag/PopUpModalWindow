@@ -22,16 +22,10 @@
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="button" onclick="submitPostForm('#CreateForm', '@Url.Action("Create", "Student", new {Area = ""})')" value="Create" class="btn btn-primary" />
         </div>
     </form>
 </div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    <script>
-        submitPostForm('#CreateForm', '@Url.Action("Create", "Student", new {Area = ""})');
-    </script>
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
