@@ -20,7 +20,7 @@ function submitPostForm(fromInformation) {
             type: 'POST',
             data: { model },
             //contentType: 'application/json; charset=utf-8',
-            //dataType: 'json',
+            dataType: 'json',
             beforeSend: function () {
                 Spiner.show();
             },
