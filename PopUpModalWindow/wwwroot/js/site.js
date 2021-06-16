@@ -1,23 +1,17 @@
 ﻿// Write your JavaScript code.
-var serialiseArrayToObject = function (obj) {
-   
-}
-function submitPostForm(fromInformation) {
+function submitForm(fromInformation) {
     var formId = "#" + fromInformation[0].getAttribute('id');
     var formActionUrl = fromInformation[0].getAttribute('action');
-
-    debugger;
+    var method = fromInformation[0].getAttribute('method');
 
     var isValid = $(formId).valid()
     if (isValid) {
         var formData = $(formId).serialize();
-        debugger;
         var model = JSON.parse('{"' + formData.replace(/&/g, '","').replace(/=/g, '":"') + '"}', function (key, value) { return key === "" ? value : decodeURIComponent(value) })
 
-        debugger;
         $.ajax({
             url: formActionUrl,
-            type: 'POST',
+            type: method,
             data: { model },
             //contentType: 'application/json; charset=utf-8',
             dataType: 'json',
@@ -26,7 +20,7 @@ function submitPostForm(fromInformation) {
             },
             success: function (result) {
                 debugger;
-                alert(result.FullName+" & "+result.Email);
+                bootbox.alert(result.FullName+" & "+result.Email);
                 Spiner.hide();
             },
             error: function (status) {
@@ -35,9 +29,6 @@ function submitPostForm(fromInformation) {
             }
         })
     }
-}
-function closeModal() {
-    $('#myModal').modal('hide');
 }
 function modalWindow(url) {
     $.ajax({
@@ -56,7 +47,10 @@ function modalWindow(url) {
         Spiner.hide();
     });
 }
-function deleteModal(url, redirectTo) {
+function closeModal() {
+    $('#myModal').modal('hide');
+}
+function deleteModal(url, redirectToUrl) {
     bootbox.confirm("Are you sure want to delete this record?", function (result) {
         if (result) {
             $.ajax({
@@ -67,7 +61,7 @@ function deleteModal(url, redirectTo) {
                     bootbox.alert({
                         message: "Record Deleted successfully!!!"
                     });
-                    loadLink(redirectTo);
+                    loadLink(redirectToUrl);
                 },
                 error: function (data) {
                     bootbox.alert('Error in getting result');

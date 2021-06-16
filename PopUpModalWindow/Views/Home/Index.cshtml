@@ -1,15 +1,12 @@
 ﻿@model PopUpModalWindow.Models.Student
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-</div>
 
 <form action="@Url.Action("Create", "Student", new {Area = ""})" method="post" id="CreateForm">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
-        <label asp-for="FullName" class="control-label"></label>
+        <label asp-for="FullName" class="control-label" required></label>
         <input asp-for="FullName" class="form-control" />
         <span asp-validation-for="FullName" class="text-danger"></span>
     </div>
@@ -19,7 +16,7 @@
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <input type="button" onclick="submitPostForm($(this).closest('form'))" value="Create" class="btn btn-primary" />
+        <input type="button" onclick="submitForm($(this).closest('form'))" value="Create" class="btn btn-primary" />
     </div>
 </form>
 @section Scripts {
