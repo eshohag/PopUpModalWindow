@@ -1,20 +1,39 @@
 ﻿// Write your JavaScript code.
-
+var serialiseArrayToObject = function (obj) {
+   
+}
 function submitPostForm(fromInformation) {
     var formId = "#" + fromInformation[0].getAttribute('id');
     var formActionUrl = fromInformation[0].getAttribute('action');
-    var method = fromInformation[0].setAttribute("method");
 
     debugger;
 
     var isValid = $(formId).valid()
     if (isValid) {
         var formData = $(formId).serialize();
-        $.post(formActionUrl, formData, function (response) {
-            //Do something with response
-            debugger;
-            alert(response.FullName);
-        });
+        debugger;
+        var model = JSON.parse('{"' + formData.replace(/&/g, '","').replace(/=/g, '":"') + '"}', function (key, value) { return key === "" ? value : decodeURIComponent(value) })
+
+        debugger;
+        $.ajax({
+            url: formActionUrl,
+            type: 'POST',
+            data: { model },
+            //contentType: 'application/json; charset=utf-8',
+            //dataType: 'json',
+            beforeSend: function () {
+                Spiner.show();
+            },
+            success: function (result) {
+                debugger;
+                alert(result.FullName+" & "+result.Email);
+                Spiner.hide();
+            },
+            error: function (status) {
+                bootbox.alert(status);
+                Spiner.hide();
+            }
+        })
     }
 }
 function closeModal() {
