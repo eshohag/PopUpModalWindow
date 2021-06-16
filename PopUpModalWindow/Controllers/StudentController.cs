@@ -18,6 +18,14 @@ namespace PopUpModalWindow.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            //return Json(
+            //    new
+            //    {
+            //        redirectTo = Url.Action("PendingAuthorization", "RuleConfig", new { Area = "" }),
+            //        message = "Record Updated successfully!!!",
+            //        position = "subContainer"
+            //    }
+            //);
             return View();
         }
         [HttpPost]

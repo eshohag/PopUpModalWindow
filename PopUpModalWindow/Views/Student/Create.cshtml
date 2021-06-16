@@ -37,20 +37,7 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    <script>
-        $('#CreateForm').on('submit', function (e) {
-            e.preventDefault();
-
-            var isValid = $('#CreateForm').valid()
-            if (isValid) {
-                debugger;
-                var formData = $(this).serialize();
-                $.post('/Student/Create', formData, function (response) {
-                    //Do something with response
-                    debugger;
-                    alert(response.FullName);
-                });
-            }
-        });
-    </script>
+<script>
+        submitPostForm('#CreateForm', '@Url.Action("Create", "Student", new {Area = ""})');
+</script>
 }
