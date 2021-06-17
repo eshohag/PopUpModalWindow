@@ -82,7 +82,7 @@ var Spiner = (function () {
         radius: 43,
         scale: 0.75,
         corners: 1,
-        color: '#004A89',
+        color: '#FF0000',
         opacity: 0.15,
         rotate: 0,
         direction: 1,
