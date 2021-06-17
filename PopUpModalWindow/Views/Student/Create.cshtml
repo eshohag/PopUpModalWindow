@@ -5,7 +5,7 @@
 }
 <div class="modal-header">
     <h4 class="modal-title">Add Record</h4>
-    <p class="close" data-dismiss="modal" aria-label="Close" style="cursor:pointer"><span aria-hidden="true"><i class="fa fa-times-circle"></i></span></p>
+    <p class="close" data-dismiss="modal" aria-label="Close" style="cursor:pointer" onclick="loadLink('@Url.Action("Index", "Student", new {Area = ""})')"><span aria-hidden="true"><i class="fa fa-times-circle"></i></span></p>
 </div>
 <div class="modal-body">
     <form action="@Url.Action("Create", "Student", new {Area = ""})" method="post" id="CreateForm">

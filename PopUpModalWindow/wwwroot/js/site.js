@@ -13,17 +13,17 @@ function submitForm(fromInformation) {
             url: formActionUrl,
             type: method,
             data: { model },
-            //contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
+            async: false,
             beforeSend: function () {
                 Spiner.show();
             },
             success: function (result) {
-                bootbox.alert({
-                    message: result.message
-                });
                 Spiner.hide();
-                //loadLink(result.redirectTo, result.position);
+                bootbox.confirm(result.message, function (a) {
+                    if (a) {
+                        loadLink(result.redirectTo);
+                    }
+                })              
             },
             error: function (status) {
                 bootbox.alert(status);
@@ -110,16 +110,14 @@ var Spiner = (function () {
     return result;
 }());
 
-function loadLink(url, positionId) {
-    if (typeof (positionId) === 'undefined') {
-        loadPartialView(url, 'mainContent');
-    } else {
-        loadPartialView(url, positionId);
-    }
+function loadLink(urlLink) {
+    location.href = urlLink;
 }
 
 function loadPartialView(urlLink, positionId) {
-    debugger;
+    if (typeof (positionId) === 'undefined') {
+        positionId= 'mainContent';
+    }
     $('#' + positionId).html('');
     Spiner.show();
     setTimeout(function () {
@@ -143,8 +141,4 @@ function loadPartialView(urlLink, positionId) {
             }
         });
     }, 10);
-}
-
-function closeWindowLoadLink(urlLink) {
-    location.href = urlLink;
 }
