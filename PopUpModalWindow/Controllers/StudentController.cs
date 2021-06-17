@@ -1,28 +1,36 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PopUpModalWindow.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PopUpModalWindow.Controllers
 {
     public class StudentController : Controller
     {
+        private List<Student> students;
+        public StudentController()
+        {
+            students = new List<Student>()
+            {
+                new Student(){FullName="AAA", Email="aa@gmail.com"},
+                new Student(){FullName="BBB", Email="bb@gmail.com"},
+                new Student(){FullName="CCC", Email="cc@gmail.com"},
+                new Student(){FullName="DDD", Email="dd@gmail.com"},
+            };
+        }
         [HttpGet]
         public IActionResult Index()
         {
-            return View(new List<Student>());
+            return View(students);
         }
-
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            return PartialView();
         }
         [HttpPost]
         public IActionResult Create(Student model)
         {
+            students.Add(model);
             return Json(
                 new
                 {

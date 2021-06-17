@@ -19,10 +19,11 @@ function submitForm(fromInformation) {
                 Spiner.show();
             },
             success: function (result) {
-                debugger;
-                bootbox.alert(result.message);
+                bootbox.alert({
+                    message: result.message
+                });
                 Spiner.hide();
-                loadLink(result.redirectTo, result.position);
+                //loadLink(result.redirectTo, result.position);
             },
             error: function (status) {
                 bootbox.alert(status);
@@ -122,7 +123,7 @@ function loadPartialView(urlLink, positionId) {
     $('#' + positionId).html('');
     Spiner.show();
     setTimeout(function () {
-        var resp = $.ajax({
+        $.ajax({
             url: urlLink,
             contentType: 'application/html; charset=utf-8',
             type: 'GET',
@@ -140,6 +141,10 @@ function loadPartialView(urlLink, positionId) {
                 bootbox.alert(status);
                 Spiner.hide();
             }
-        }).responseText;
+        });
     }, 10);
+}
+
+function closeWindowLoadLink(urlLink) {
+    location.href = urlLink;
 }
