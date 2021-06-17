@@ -19,8 +19,8 @@ function submitForm(fromInformation) {
             },
             success: function (result) {
                 Spiner.hide();
-                bootbox.confirm(result.message, function (a) {
-                    if (a) {
+                bootbox.confirm(result.message, function (yesNo) {
+                    if (yesNo) {
                         loadLink(result.redirectTo);
                     }
                 })              
